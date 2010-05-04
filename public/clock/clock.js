@@ -1,4 +1,4 @@
-function foo() {
+function clock() {
   document.getElementById('clock').textContent = new Date();
-  setTimeout(foo, 100);
+  setTimeout(clock, 100);
 }
