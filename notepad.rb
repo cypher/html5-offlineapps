@@ -3,6 +3,8 @@ require 'sinatra'
 
 configure do
   Rack::Mime::MIME_TYPES['.manifest'] = 'text/cache-manifest'
+
+  # Prevent double logging
   disable :logging
 end
 
