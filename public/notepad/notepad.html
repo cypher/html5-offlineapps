@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<!-- <html manifest="notepad.manifest"> -->
+<html>
+<head>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" /> -->
+    <link rel="apple-touch-icon" href="iphone_app_icon.png"/>
+
+    <link rel="apple-touch-startup-image" href="startup.png" />
+    <link rel="stylesheet" href="notepad.css" type="text/css" media="screen, mobile" title="main" charset="utf-8">
+
+    <title>Simple Notepad</title>
+
+    <script src="prototype.js"></script>
+    <script src="notepad.js"></script>
+</head>
+<body>
+    <div id="status"></div>
+    <form id="notepad" name="notepad">
+        <textarea id="note" name="note" cols="41" rows="10"></textarea>
+        <input type="button" value="Save" onclick="saveNote()">
+    </form>
+    <h2>Notes:</h2>
+    <ol id="list">
+    </ol>
+</body>
+</html>
