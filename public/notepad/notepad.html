@@ -1,29 +1,53 @@
 <!DOCTYPE HTML>
 <html manifest="notepad.manifest">
 <head>
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <!-- <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" /> -->
-    <link rel="apple-touch-icon" href="iphone_app_icon.png"/>
 
+    <link rel="apple-touch-icon" href="iphone_app_icon.png"/>
     <link rel="apple-touch-startup-image" href="startup.png" />
+
     <link rel="stylesheet" href="notepad.css" type="text/css" media="screen, mobile" title="main" charset="utf-8">
 
-    <title>Simple Notepad</title>
+    <title>Notepad</title>
 
     <script src="prototype.js"></script>
     <script src="notepad.js"></script>
 </head>
 <body>
-    <div id="status"></div>
-    <form id="notepad" name="notepad">
-        <textarea id="note" name="note" cols="41" rows="10"></textarea>
-        <input type="button" value="Save" onclick="saveNote()">
-    </form>
-    <h2>Notes:</h2>
-    <ol id="list">
-    </ol>
+    <div id="loading" style="position: absolute; left: 0; top: 0;">
+        Loading....
+    </div>
+
+    <div id="noiphone" style="visibility: hidden; position: absolute; left: 0; top: 0;">
+        This is an iPhone web app. Load this page on an iPhone!
+    </div>
+
+    <div id="notinstalled" style="visibility: hidden; position: absolute; left: 0; top: 0;">
+        To install this web app, tap the + button at the bottom of the page, then select "Add to Home Screen".
+    </div>
+
+    <div id="nonavigation" style="visibility: hidden; position: absolute; left: 0; top: 0;">
+        Location services aren't available for some reason.
+    </div>
+
+    <div id="navigation" style="visibility: hidden;">
+        Longitude: <span id="longitude">N/A</span>
+        <br>
+        Latitude: <span id="latitude">N/A</span>
+    </div>
+
+    <div id="main" style="visibility: hidden;">
+        <div id="status"></div>
+        <form id="notepad" name="notepad">
+            <textarea id="note" name="note" cols="41" rows="10"></textarea>
+            <input type="button" value="Save" onclick="saveNote()">
+        </form>
+        <h2>Notes:</h2>
+        <ol id="list">
+        </ol>
+    </div>
 </body>
 </html>

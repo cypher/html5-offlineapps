@@ -1,7 +1,41 @@
 document.observe("dom:loaded", function() {
   $('status').innerHTML = window.navigator.onLine ? 'Online' : 'Offline';
+
+  $("loading").style.visibility = "hidden";
+
+  // no iPhone
+  if(navigator.appVersion.indexOf('iPhone OS ') < 0)
+  {
+    $("noiphone").style.visibility = "visible";
+  }
+  else if(!window.navigator.standalone)
+  {
+    $("notinstalled").style.visibility = "visible";
+  }
+  // has navigation?
+  else if(!(typeof navigator.geolocation != "undefined"))
+  {
+    $("nonavigation").style.visibility = "visible";
+  }
+  else
+  {
+    // we're on a phone, and installed standalone
+    // "real" app init code goes here
+    $("navigation").style.visibility = "visible";
+    $("main").style.visibility = "visible";
+
+    navigator.geolocation.watchPosition(positionWatcher);
+  }
+
   updateNoteList();
 });
+
+function positionWatcher(location)
+{
+  $("longitude").textContent = location.coords.longitude;
+  $("latitude").textContent = location.coords.latitude;
+}
+
 
 function nullDataHandler(transaction, results) { }
 
@@ -44,6 +78,7 @@ var saveNote = function() {
     });
 
     updateNoteList();
+    $('note').value = '';
   }
 };
 
