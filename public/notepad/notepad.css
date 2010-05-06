@@ -1,0 +1,51 @@
+body { 
+  font-family: Helvetica, sans-serif; 
+  line-height: 1.5em;
+  margin: 1em;
+  background: #ddd;
+}
+
+input, textarea {
+  font-size: 1em;
+  width: 100%;
+}
+input[type=submit] {
+  display: block;
+  clear: both;
+}
+
+#navigation label {
+  display: block;
+  float: left;
+  margin-right: .5em;
+}
+#longitude, #latitude {
+  display: block;
+  float: left;
+  width: 3em;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+#longitude { margin-right: 1em; }
+
+
+#status {
+  -webkit-border-radius: 1em;
+  padding: .2em .8em;
+  float: right;
+  color: #fff;
+}
+#status.Online { background: #0c0; }
+#status.Offline { background: #c00; }
+
+#notelist {
+  background: #fff;
+  -webkit-border-radius: 1em;
+  padding: 1em;
+  margin-top: 1em;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.2em;
+}

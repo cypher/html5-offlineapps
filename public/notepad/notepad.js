@@ -1,5 +1,6 @@
 document.observe("dom:loaded", function() {
   $('status').innerHTML = window.navigator.onLine ? 'Online' : 'Offline';
+  $('status').className = $('status').innerHTML;
 
   $("loading").style.visibility = "hidden";
 

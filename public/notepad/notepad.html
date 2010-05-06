@@ -34,9 +34,8 @@
     </div>
 
     <div id="navigation" style="visibility: hidden;">
-        Longitude: <span id="longitude">N/A</span>
-        <br>
-        Latitude: <span id="latitude">N/A</span>
+        <label>Longitude:</label> <span id="longitude">N/A</span>
+        <label>Latitude:</label> <span id="latitude">N/A</span>
     </div>
 
     <div id="main" style="visibility: hidden;">
@@ -45,9 +44,11 @@
             <textarea id="note" name="note" cols="41" rows="10"></textarea>
             <input type="button" value="Save" onclick="saveNote()">
         </form>
-        <h2>Notes:</h2>
-        <ol id="list">
-        </ol>
+    </div>
+    <div id="notelist">
+      <h2>Notes:</h2>
+      <ol id="list">
+      </ol>
     </div>
 </body>
 </html>
