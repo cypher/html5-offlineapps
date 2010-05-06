@@ -24,6 +24,7 @@ document.observe("dom:loaded", function() {
     // "real" app init code goes here
     $("navigation").style.visibility = "visible";
     $("main").style.visibility = "visible";
+    $("notelist").style.visibility = "visible";
 
     navigator.geolocation.watchPosition(positionWatcher);
 
