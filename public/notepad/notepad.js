@@ -58,8 +58,8 @@ function errorHandler(transaction, error)
 }
 
 var database = function() {
-  shortName = 'notesdb';
-  version = '0.2';
+  shortName = 'notedb';
+  version = '0.3';
   displayName = 'Notepad Database';
   maxSize = 65536; // in bytes
   db = openDatabase(shortName, version, displayName, maxSize);
