@@ -5,16 +5,16 @@ document.observe("dom:loaded", function() {
   $("loading").style.visibility = "hidden";
 
   // no iPhone
-  if(navigator.appVersion.indexOf('iPhone OS ') < 0 && !running_on_localhost())
+  if(navigator.appVersion.indexOf('iPhone OS ') < 0)
   {
     $("noiphone").style.visibility = "visible";
   }
-  else if(!window.navigator.standalone && !running_on_localhost())
+  else if(!window.navigator.standalone)
   {
     $("notinstalled").style.visibility = "visible";
   }
   // has navigation?
-  else if(!(typeof navigator.geolocation != "undefined") && !running_on_localhost())
+  else if(!(typeof navigator.geolocation != "undefined"))
   {
     $("nonavigation").style.visibility = "visible";
   }
@@ -30,11 +30,6 @@ document.observe("dom:loaded", function() {
     updateNoteList();
   }
 });
-
-function running_on_localhost()
-{
-  return document.location.href.indexOf('localhost');
-}
 
 function positionWatcher(location)
 {
