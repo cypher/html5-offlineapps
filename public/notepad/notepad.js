@@ -53,7 +53,7 @@ function errorHandler(transaction, error)
 
 var database = function() {
   shortName = 'notesdb';
-  version = '0.1';
+  version = '0.2';
   displayName = 'Notepad Database';
   maxSize = 65536; // in bytes
   db = openDatabase(shortName, version, displayName, maxSize);
@@ -71,21 +71,31 @@ var database = function() {
 };
 
 var saveNote = function() {
+  console.log("Saving note");
   note = $('note').value;
 
   if( !note.strip().empty() ) {
     database().transaction(function(transaction){
+      console.log("Trying to insert note");
       transaction.executeSql('INSERT INTO notes (note, lat, lon) VALUES (?, ?, ?)', [note.strip(), $("latitude").textContent, $("longitude").textContent], nullDataHandler, errorHandler);
-    });
+      console.log("Inserted note.");
 
-    updateNoteList();
-    $('note').value = '';
+      setTimeout(updateNoteList, 500);
+      $('note').value = '';
+      console.log("Done saving note.");
+    });
+  }
+  else {
+    console.log("Note is empty!");
   }
 };
 
 var updateNoteList = function() {
+  console.log("Updating note list");
   database().transaction(function(transaction) {
+    console.log("Reading note list");
     transaction.executeSql("SELECT * FROM notes;", [], function(transaction, results) {
+      console.log("Updating notes")
       list = $('list');
       // Clear out items
       list.innerHTML = '';
@@ -94,9 +104,10 @@ var updateNoteList = function() {
         var row = results.rows.item(i);
 
         li = document.createElement('li');
-        li.innerHTML = row['note'] + " (" + row['lat'] + ", " + row['lon'] + ")";
+        li.innerHTML = "" + row['note'] + " (" + row['lat'] + ", " + row['lon'] + ")";
         list.appendChild(li);
       }
+      console.log("Done updating notes list.")
     }, errorHandler);
   });
 };
