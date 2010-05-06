@@ -25,9 +25,9 @@ document.observe("dom:loaded", function() {
     $("main").style.visibility = "visible";
 
     navigator.geolocation.watchPosition(positionWatcher);
-  }
 
-  updateNoteList();
+    updateNoteList();
+  }
 });
 
 function positionWatcher(location)
@@ -43,7 +43,7 @@ function errorHandler(transaction, error)
 {
     // error.message is a human-readable string.
     // error.code is a numeric error code
-    console.log('Oops.  Error was '+error.message+' (Code '+error.code+')');
+    console.log('Oops.  Error was \''+error.message+'\' (Code '+error.code+')');
  
     // Handle errors here
     // var we_think_this_error_is_fatal = true;
@@ -61,9 +61,10 @@ var database = function() {
   // Create the db if it doesn't exist
   db.transaction(function(transaction) {
     // This will fail if the table already exists
-    transaction.executeSql('CREATE TABLE notes(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, note TEXT NOT NULL);', [], nullDataHandler, errorHandler);
+    transaction.executeSql('CREATE TABLE notes(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, note TEXT NOT NULL, lat TEXT NOT NULL, lon TEXT NOT NULL);', [], nullDataHandler, errorHandler);
+
     // These will be skipped if it already exists
-    transaction.executeSql('INSERT INTO notes (note) VALUES ("This is an example note");', [], nullDataHandler, errorHandler);
+    transaction.executeSql('INSERT INTO notes (note, lat, lon) VALUES ("This is an example note", ?, ?);', [$("latitude").textContent, $("longitude").textContent], nullDataHandler, errorHandler);
   });
 
   return db;
@@ -74,7 +75,7 @@ var saveNote = function() {
 
   if( !note.strip().empty() ) {
     database().transaction(function(transaction){
-      transaction.executeSql('INSERT INTO notes (note) VALUES (?)', [note.strip()]);
+      transaction.executeSql('INSERT INTO notes (note, lat, lon) VALUES (?, ?, ?)', [note.strip(), $("latitude").textContent, $("longitude").textContent], nullDataHandler, errorHandler);
     });
 
     updateNoteList();
@@ -93,7 +94,7 @@ var updateNoteList = function() {
         var row = results.rows.item(i);
 
         li = document.createElement('li');
-        li.innerHTML = row['note'];
+        li.innerHTML = row['note'] + " (" + row['lat'] + ", " + row['lon'] + ")";
         list.appendChild(li);
       }
     }, errorHandler);
