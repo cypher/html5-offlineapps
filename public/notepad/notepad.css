@@ -14,27 +14,35 @@ input[type=submit] {
   display: block;
   clear: both;
 }
+textarea {
+  padding: 0;
+}
 
+#navigation {
+  font-size: .75em;
+  color: #777;
+}
 #navigation label {
   display: block;
   float: left;
-  margin-right: .5em;
+  margin-right: .3em;
 }
 #longitude, #latitude {
   display: block;
   float: left;
-  width: 3em;
+  width: 4.5em;
   overflow: hidden;
-  border: 1px solid #ccc;
+  text-overflow: ellipsis;
 }
-#longitude { margin-right: 1em; }
+#longitude { margin-right: .8em; }
 
 
 #status {
   -webkit-border-radius: 1em;
-  padding: .2em .8em;
+  padding: 0 .6em;
   float: right;
   color: #fff;
+  font-size: .8em;
 }
 #status.Online { background: #0c0; }
 #status.Offline { background: #c00; }
